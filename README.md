@@ -1,5 +1,5 @@
 # Wowza Caption Handlers
-The **Caption Handlers** module for [Wowza Streaming Engine™ media server software](https://www.wowza.com/products/streaming-engine) enables you to track your streaming connections in the Google Analytics service.
+The **Caption Handlers** module for [Wowza Streaming Engine™ media server software](https://www.wowza.com/products/streaming-engine) enables you to generate CEA608/708 or WebVTT subtitles for live streams using the Azure speech to text service, or the Whisper ASR system.
 
 ## Prerequisites
 * Wowza Streaming Engine™ 4.9.4 or later is required.
