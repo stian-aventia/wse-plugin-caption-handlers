@@ -43,7 +43,7 @@
 			<!-- [templatename].xml or ${SourceStreamName}.xml -->
 			<Templates>${SourceStreamName}.xml</Templates>
 			<ProfileDir>${com.wowza.wms.context.VHostConfigHome}/transcoder/profiles</ProfileDir>
-			<TemplateDir>${com.wowza.wms.context.VHostConfigHome}/transcoder/templates/${com.wowza.wms.context.Application}</TemplateDir>
+			<TemplateDir>${com.wowza.wms.context.VHostConfigHome}/transcoder/templates</TemplateDir>
 			<Properties>
 			</Properties>
 		</Transcoder>
