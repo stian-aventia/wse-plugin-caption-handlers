@@ -20,9 +20,9 @@ See the included Application.xml files for the module configurations.
 
 ## More resources
 For full install instructions and to use the compiled version of these modules, see the following articles:
-* COMING SOON
-<!--- [Convert speech to text to generate captions for live streams with Azure AI Speech Services](https://www.wowza.com/docs/convert-speech-to-text-to-generate-captions-for-live-streams-with-azure-ai-speech-services)--->
-<!--- [Convert speech to text to generate captions for live streams with OpenAI Whisper](https://www.wowza.com/docs/convert-speech-to-text-to-generate-captions-for-live-streams-with-openai-whisper)--->
+
+[Convert speech to text to generate captions for live streams with Azure AI Speech Services](https://www.wowza.com/docs/convert-speech-to-text-to-generate-captions-for-live-streams-with-azure-ai-speech-services)
+[Convert speech to text to generate captions for live streams with OpenAI Whisper](https://www.wowza.com/docs/convert-speech-to-text-to-generate-captions-for-live-streams-with-openai-whisper)
 
 [Wowza Streaming Engine Server-Side API Reference](https://www.wowza.com/resources/serverapi/)
 
