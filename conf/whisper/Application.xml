@@ -189,7 +189,7 @@
 			<Properties>
 				<Property>
 					<Name>cupertinoChunkDurationTarget</Name>
-					<Value>6000</Value>
+					<Value>10000</Value>
 				</Property>
 				<Property>
 					<Name>cupertinoMaxChunkCount</Name>
