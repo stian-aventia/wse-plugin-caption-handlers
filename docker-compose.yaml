@@ -59,5 +59,6 @@ services:
         image: wowza/wowza-streaming-engine-manager:latest
         environment:
             - LOG_LEVEL=WARN #DEBUG INFO WARN ERROR
+            - WSE_HOST=http://wse.docker:8087
         ports:
             - 8088:8080
