@@ -11,13 +11,20 @@ The **Caption Handlers** module for [Wowza Streaming Engine™ media server soft
 The easiest way to test this module is to use the included docker compose file. This will start a Wowza Streaming Engine instance with the modules installed and configured to use Azure Speech Services or Whisper to create the captions.
 
 ## Test
-Push a video to `rtmp://wse-demo.wowza.com/whisper/myStream` 
+Below are 4 quick steps to test captions using the OpenAI Whisper service.
+1. Update docker-compose.yaml with your Wowza Streaming Engine License Key (`$WSE_LICENSE_KEY`)
+2. Launch services with docker compose
+```
+docker compose up
+```
+3. Push a video to your Wowza Streaming Engine service with `rtmp://wse-demo.wowza.com/whisper/myStream` 
 
-Example ffmpeg command
-```
-ffmpeg -re -y -stream_loop -1 -i <yourfile.mp4> -vcodec libx264 -f flv rtmp://wse-demo.wowza.com/whisper/myStream
-```
-Playback with HLS test Player and select English Captions
+> Example ffmpeg command:
+> ```
+>ffmpeg -re -y -stream_loop -1 -i <yourfile.mp4> -vcodec libx264 -f flv rtmp://wse-demo.wowza.com/whisper/myStream
+>```
+
+4. Playback with the HLS Test Player and select English Captions after ~20s:
 https://www.wowza.com/testplayers?src=https://wse-demo.wowza.com/whisper/myStream_delayed/playlist.m3u8
 
 ## Build instructions
