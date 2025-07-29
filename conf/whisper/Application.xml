@@ -186,10 +186,6 @@
 		<LiveStreamPacketizer>
 			<!-- Properties defined here will override any properties defined in conf/LiveStreamPacketizers.xml for any LiveStreamPacketizers loaded by this applications -->
 			<Properties>
-				<Property>
-					<Name>cupertinoMaxChunkCount</Name>
-					<Value>10</Value>
-				</Property>
 			</Properties>
 		</LiveStreamPacketizer>
 		<HTTPStreamer>
