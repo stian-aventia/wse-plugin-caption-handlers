@@ -7,4 +7,6 @@ RUN apt-get update && \
 
 COPY setup_script.sh /wowza_setup/
 
+RUN chmod +x /wowza_setup/setup_script.sh
+
 ENTRYPOINT ["/wowza_setup/setup_script.sh"]

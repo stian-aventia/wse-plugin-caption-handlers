@@ -1,3 +1,9 @@
+# Wowza Streaming Engine Caption Handlers
+#
+# To use external Whisper server: 
+# 1. Comment out the whisper_server service below
+# 2. Update whisperSocketHost in conf/whisper/Application.xml to your external server IP
+#
 name: Wowza Streaming Engine Caption Handlers
 services:
     wse:
@@ -36,22 +42,31 @@ services:
         build:
             context: wowza_setup
         restart: "no"
+        environment:
+            - PLUGIN_VERSION=1.1.1
+            - CLIENT_SDK_VERSION=1.44.0
+            - GITHUB_RELEASE_VERSION=1.1.0
         volumes:
             - ./lib:/wowza_setup/downloads
+            - ./build:/wowza_setup/build
 
-    whisper_server:
-        hostname: whisper.server
-        image: wowza/whisper_streaming:latest
-        #platform: linux/arm64
-        environment:
-            - MODEL=tiny.en # tiny.en, base.en, small.en, medium.en, large-v3
-            - LOG_LEVEL=INFO
-            - MIN_CHUNK_SIZE=1
-            - REPORT_LANGUAGE=en
-        ports:
-            - 3000:3000
-        volumes:
-            - ./model_cache:/tmp
+    # whisper_server:
+    #     hostname: whisper.server
+    #     #image: wowza/whisper_streaming:latest
+    #     image: whisper_streaming:local
+    #     #platform: linux/arm64
+    #     environment:
+    #         - MODEL_DIR=/tmp
+    #         - MODEL=medium # tiny.en, base.en, small.en, medium.en, large-v3
+    #         - LANGUAGE=no
+    #         - LOG_LEVEL=INFO
+    #         - MIN_CHUNK_SIZE=1
+    #         - REPORT_LANGUAGE=no
+    #         - USE_GPU=False
+    #     ports:
+    #         - 3000:3000
+    #     volumes:
+    #         - ./model_cache:/tmp
 
     manager:
         hostname: wsem.docker

@@ -72,10 +72,10 @@
 			<VODTimedTextProviders></VODTimedTextProviders>
 			<!-- Properties for TimedText -->
 			<Properties>
-<!--				<Property>-->
-<!--					<Name>captionLiveIngestLanguages</Name>-->
-<!--					<Value>eng</Value>-->
-<!--				</Property>-->
+				<Property>
+					<Name>captionLiveIngestLanguages</Name>
+					<Value>no</Value>
+				</Property>
 			</Properties>
 		</TimedText>
 		<!-- HTTPStreamers (separate with commas): cupertinostreaming, smoothstreaming, sanjosestreaming, mpegdashstreaming, dvrchunkstreaming -->
@@ -230,11 +230,13 @@
 			</Property>
 			<Property>
 				<Name>whisperSocketHost</Name>
-				<Value>whisper.server</Value>
+				<!-- For local Whisper server use: whisper.server -->
+				<!-- For external Whisper server use IP or hostname, e.g.: 192.168.1.100 -->
+				<Value>hq.aventia.no</Value>
 			</Property>
 			<Property>
 				<Name>whisperSocketPort</Name>
-				<Value>3000</Value>
+				<Value>8000</Value>
 			</Property>
 			<Property>
 				<Name>captionHandlerDebug</Name>

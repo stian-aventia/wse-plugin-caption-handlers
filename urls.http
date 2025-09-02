@@ -1,0 +1,2 @@
+# test player for local stream
+https://www.wowza.com/testplayers?src=http://localhost:1935/whisper/myStream_delayed/playlist.m3u8
