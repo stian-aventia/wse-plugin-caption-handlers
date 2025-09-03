@@ -28,6 +28,8 @@ import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -230,17 +232,11 @@ public class WhisperSpeechToTextHandler implements SpeechHandler
         try
         {
             List<Caption> captions = new ArrayList<>();
-            if (debugLog)
-                logger.info(CLASS_NAME + ".processPendingCaptions: processing " + captionLines.size() + " language(s)");
                 
             for (Map.Entry<String, LinkedList<CaptionLine>> entry : captionLines.entrySet())
             {
                 String language = entry.getKey();
                 LinkedList<CaptionLine> lines = entry.getValue();
-
-                if (debugLog)
-                    logger.info(CLASS_NAME + ".processPendingCaptions: language '" + language + "' has " + lines.size() + " pending lines");
-
                 synchronized (lines)
                 {
                     Instant start = null;
@@ -264,12 +260,15 @@ public class WhisperSpeechToTextHandler implements SpeechHandler
                         Caption caption = new Caption(language, start, end, String.join("\n", textList), 99);
                         captions.add(caption);
                         if (debugLog)
-                            logger.info(CLASS_NAME + ".processPendingCaptions: created caption for language '" + language + "': " + String.join("\n", textList));
+                        {
+                            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS").withZone(ZoneOffset.UTC);
+                            String startTime = timeFormatter.format(start);
+                            String endTime = timeFormatter.format(end);
+                            logger.info(CLASS_NAME + ".processPendingCaptions FINAL_CAPTION: [" + startTime + "=>" + endTime + "] " + String.join("\\n", textList));
+                        }
                     }
                 }
             }
-            if (debugLog)
-                logger.info(CLASS_NAME + ".processPendingCaptions: sending " + captions.size() + " caption(s) to handler");
             captions.forEach(captionHandler::handleCaption);
         }
         catch (Exception e)
@@ -285,7 +284,7 @@ public class WhisperSpeechToTextHandler implements SpeechHandler
     @Override
     public void addAudioFrame(byte[] frame)
     {
-        audioBuffer.add(ByteBuffer.wrap(frame));e
+        audioBuffer.add(ByteBuffer.wrap(frame));
     }
 
     @Override
@@ -342,8 +341,7 @@ public class WhisperSpeechToTextHandler implements SpeechHandler
                 }
 
                 List<String> items = Arrays.stream(text.split("\\s+")).toList();
-                if (debugLog)
-                    logger.info(CLASS_NAME + ".handleCaptionMessage: items: " + items);
+
                 float duration = response.getEnd() - response.getStart();
                 float perWordDuration = duration / items.size();
                 Instant currentEnd = end; // Track the current end time for timing calculations
@@ -362,8 +360,6 @@ public class WhisperSpeechToTextHandler implements SpeechHandler
                             line.setEnd(currentEnd);
                             line.setText(sb.toString());
                             sb.setLength(0);
-                            if (debugLog)
-                                logger.info(CLASS_NAME + ".handleCaptionMessage(maxLineLength): start: " + line.getStart() + ", end: " + line.getEnd() + ", text: " + line.getText());
                             line = new CaptionLine(language);
                             line.setStart(CaptionHelper.epochInstantFromMillis((long) (itemStart * 1000)));
                             lines.add(line);
@@ -380,8 +376,6 @@ public class WhisperSpeechToTextHandler implements SpeechHandler
                 {
                     line.setEnd(currentEnd);
                     line.setText(text);
-                    if (debugLog)
-                        logger.info(CLASS_NAME + ".handleCaptionMessage(end): start: " + line.getStart() + ", end: " + line.getEnd() + ", text: " + line.getText());
                 }
             }
         }

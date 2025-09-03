@@ -5,6 +5,23 @@ All notable changes to the Wowza Caption Handlers plugin will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2025-09-02
+
+### Added
+- **Enhanced Timing Debug Logging**: Added comprehensive debug logging for caption timing analysis when `captionHandlerDebug` is enabled:
+  - Original Whisper response timing information (start, end, duration)
+  - Word-by-word timing calculations and chunk building process
+  - Line splitting behavior when maximum line length is exceeded
+  - Caption assembly process showing how chunks are combined
+  - Remaining queue content when captions are processed
+  - Gap analysis between caption chunks and newline threshold comparisons
+
+### Technical Details
+- All timing-related debug logs are prefixed with "TIMING:" for easy filtering
+- Logs show both original Whisper timestamps and adjusted chunk timings
+- Provides visibility into when "overskytende" (remaining) text is moved to next caption
+- Helps diagnose premature caption end times that cause text to disappear before speech completion
+
 ## [1.1.2] - 2025-09-01
 
 ### Fixed
